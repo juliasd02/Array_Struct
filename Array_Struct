@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+#define MAX_ALUNOS 50     // limite máximo de cadastros
+
+typedef struct {
+    char nome[100];
+    char email[100];
+} pessoa;
+
+int main() {
+    pessoa alunos[MAX_ALUNOS];
+    int num_alunos = 0, i; // Variável para rastrear o número atual de alunos cadastrados
+    char continuar;
+
+    do {
+        printf("Digite o nome completo: ");
+        fgets(alunos[num_alunos].nome, sizeof(alunos[num_alunos].nome), stdin);
+        printf("Digite o e-mail completo: ");
+        fgets(alunos[num_alunos].email, sizeof(alunos[num_alunos].email), stdin);
+
+        num_alunos++;   
+
+        if (num_alunos < MAX_ALUNOS) {
+            printf("Deseja cadastrar outro aluno? (S/N): ");
+            scanf(" %c", &continuar);
+        } else {
+            printf("Limite máximo de cadastros atingido.\n");
+            break;  
+        }
+    } while (num_alunos < MAX_ALUNOS && (continuar == 'S' || continuar == 's'));
+
+
+    printf("\n**Lista de alunos **\n");
+    for (int i = 0; i < num_alunos; i++) {
+        printf("Nome: %s", alunos[i].nome);
+        printf("E-mail: %s\n", alunos[i].email);
+    }
+
+    return 0;
+}
+
+
